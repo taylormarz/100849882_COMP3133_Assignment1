@@ -12,7 +12,7 @@ const userQueries = {
 
         // incase match not found for provided username OR email
         if(!user) {
-            throw {message: 'A user with those credentials does not exist in the DB.'}
+            throw new Error('A user with those credentials does not exist in the DB.')
         };
 
         // comparing entered password with encrypted password
@@ -20,7 +20,7 @@ const userQueries = {
         
         // incase password doesn't pass validation
         if(!passwordMatch) {
-            throw {message: 'The password you entered is incorrect.'}
+            throw new Error('The password you entered is incorrect.')
         };
 
         // return user obj
