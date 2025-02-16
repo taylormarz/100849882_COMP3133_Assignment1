@@ -1,0 +1,23 @@
+type Employee {
+    id: ID!
+    first_name: String!
+    last_name: String!
+    email: String!
+    gender: String!
+    designation: String!
+    salary: Float!
+    department: String!
+    employee_photo: String
+}
+
+type Query {
+    listAllEmployees(): [Employee]
+    searchEmployeeById(id: ID!): Employee
+    searchEmployeeByDesDep(designation: String, department: String): [Employee]
+}
+
+type Mutation {
+    createNewEmployee(first_name: String!, last_name: String!, email: String!, gender: String!, designation: String!, salary: Float!, department: String!, employee_photo: String): Employee
+    updateEmployeeById(id: ID!, first_name: String!, last_name: String!, email: String!, gender: String!, designation: String!, salary: Float!, department: String!, employee_photo: String): Employee
+    deleteEmployeeById(id: ID!): Employee
+}
