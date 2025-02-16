@@ -26,7 +26,7 @@ const userMutations = {
             throw new Error('An unexpected error occured, new user could not be created.');
         };
 
-        // return new user obj + success message
+        // return new user obj + success
         return {
             message: 'New user was created successfully!',
             user: newUser
