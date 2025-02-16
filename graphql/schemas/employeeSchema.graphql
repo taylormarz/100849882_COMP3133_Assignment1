@@ -11,7 +11,7 @@ type Employee {
 }
 
 type Query {
-    listAllEmployees(): [Employee]
+    listAllEmployees: [Employee]
     searchEmployeeById(id: ID!): Employee
     searchEmployeeByDesDep(designation: String, department: String): [Employee]
 }
