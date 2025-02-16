@@ -10,8 +10,6 @@ const SERVER_PORT = process.env.PORT;
 
 // db connection
 connectDB().then(() => {
-    console.log('MongoDB connected successfully');
-
     // api route
     app.use(
         "/graphql",
