@@ -1,9 +1,6 @@
 const employeeMutations = require('../../mutations/employeeMutations');
 const employeeQueries = require('../../queries/employeeQueries');
 
-employeeQueries   = require('../../queries/employeeQueries');
-employeeMutations = require('../../mutations/employeeMutations');
-
 const employeeResolvers = {
     // query resolver
     Query: {
