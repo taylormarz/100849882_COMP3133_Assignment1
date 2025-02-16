@@ -1,12 +1,33 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const { graphqlHTTP } = require('express-graphql');
 const connectDB = require('./config/db');
-const app = express();
-const SERVER_PORT = 4000;
+const schema = require('./graphql/schemas/schemas');
+const resolvers = require('./graphql/resolvers/resolvers');
+require('dotenv').config();
 
-app.listen(SERVER_PORT, () => {
-    console.log('Sever started')
-    // db connection
-    connectDB();
-    console.log('http://localhost:4000/')
+const app = express();
+const SERVER_PORT = process.env.PORT;
+
+// db connection
+connectDB().then(() => {
+    console.log('MongoDB connected successfully');
+
+    // api route
+    app.use(
+        "/graphql",
+        graphqlHTTP({
+            schema,
+            rootValue: resolvers,
+            graphiql: true,
+        })
+    );
+
+    // start server
+    app.listen(SERVER_PORT, () => {
+        console.log(`Server started: http://localhost:${SERVER_PORT}/graphql`);
+    });
+
+}).catch(err => {
+    // incase db connection failed
+    console.error('Database connection failed:', err);
 });
