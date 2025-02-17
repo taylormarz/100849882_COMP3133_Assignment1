@@ -88,14 +88,14 @@ const employeeResolvers = {
     // update employee by their id
     updateEmployeeById: async ({ eid, first_name, last_name, email, gender, designation, salary, department, date_of_joining, employee_photo }) => {
         try {
-           // find the employee by their id
+            // find the employee by their id
             const employee = await Employee.findById(eid);
-
+            
             // error incase employee can't be found
             if (!employee) {
                 throw new Error('Employee not found');
             }
-
+    
             // update whichever fields given
             if (first_name) employee.first_name = first_name;
             if (last_name) employee.last_name = last_name;
@@ -106,15 +106,16 @@ const employeeResolvers = {
             if (department) employee.department = department;
             if (date_of_joining) employee.date_of_joining = date_of_joining;
             if (employee_photo) employee.employee_photo = employee_photo;
-
+    
             // save updated employee to db
-            await employee.save();
+            const updatedEmployee = await employee.save();
+    
             // return updated employee obj
-            return employee;
-
+            return updatedEmployee;
+    
         } catch (error) {
             // incase employee can't be updated
-            throw new Error('Error, could not update employee.');
+            throw new Error('Error, could not update employee: ' + error.message);
         }
     },
 

@@ -35,7 +35,6 @@ const schema = buildSchema(`
     type Mutation {
         createUser(username: String!, email: String!, password: String!): User
         createNewEmployee(first_name: String!, last_name: String!, email: String!, gender: String!, designation: String!, salary: Float!, department: String!, date_of_joining: String, employee_photo: String): Employee
-        updateEmployeeById(eid: ID!, first_name: String, last_name: String, email: String, gender: String, designation: String, salary: Float, department: String, employee_photo: String): Employee
         updateEmployeeById(eid: ID!, first_name: String, last_name: String, email: String, gender: String, designation: String, salary: Float, department: String, date_of_joining: String, employee_photo: String): Employee
         deleteEmployeeById(eid: ID!): String
     }
