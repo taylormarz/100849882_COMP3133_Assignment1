@@ -52,7 +52,7 @@ const userResolvers = {
 
         // return user obj
         return {
-            message: 'Success, that user was found!',
+            message: 'User sign in successful!',
             user: user
         };
     }
