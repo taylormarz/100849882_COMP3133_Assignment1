@@ -1,4 +1,4 @@
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema ({
     first_name:      { type: String, required: true },
@@ -7,7 +7,7 @@ const employeeSchema = new mongoose.Schema ({
     gender:          { type: String, required: true, enum: ['Male', 'Female', 'Other'] },
     designation:     { type: String, required: true },
     salary:          { type: Number, required: true, min: 1000 },
-    date_of_joining: { type: Date,   required: true, default: Date.now },
+    date_of_joining: { type: Date,   default: Date.now },
     department:      { type: String, required: true },
     employee_photo:  { type: String }
 },

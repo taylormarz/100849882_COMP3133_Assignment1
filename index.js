@@ -2,30 +2,32 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const connectDB = require('./config/db');
 const schema = require('./graphql/schemas/schemas');
-const resolvers = require('./graphql/resolvers/resolvers');
-require('dotenv').config();
+const userResolvers = require('./graphql/resolvers/userResolvers');
+const employeeResolvers = require('./graphql/resolvers/employeeResolvers');
 
 const app = express();
-const SERVER_PORT = process.env.PORT;
+const SERVER_PORT = process.env.PORT
+
+// combining user and employee resolvers into one
+const rootResolvers = {
+    ...userResolvers,
+    ...employeeResolvers
+};
 
 // db connection
-connectDB().then(() => {
+connectDB();
+
+app.use(express.json());
+app.use(
     // api route
-    app.use(
-        "/graphql",
-        graphqlHTTP({
-            schema,
-            rootValue: resolvers,
-            graphiql: true,
-        })
-    );
+    '/graphql',
+    graphqlHTTP({
+        schema,
+        rootValue: rootResolvers,
+        graphiql: true
+    })
+);
 
-    // start server
-    app.listen(SERVER_PORT, () => {
-        console.log(`Server started: http://localhost:${SERVER_PORT}/graphql`);
-    });
-
-}).catch(err => {
-    // incase db connection failed
-    console.error('Database connection failed:', err);
+app.listen(SERVER_PORT, () => {
+    console.log(`Server started: http://localhost:${SERVER_PORT}/graphql`);
 });
